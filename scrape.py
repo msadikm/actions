@@ -1,6 +1,6 @@
 import json
 import httpx
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from lxml import html
 from typing import List, Dict
 
@@ -36,7 +36,7 @@ def scrape_imdb() -> List[Dict[str, str]]:
     return movies
 
 # Save scraped data with timestamp
-now = datetime.now(UTC)
+now = datetime.now(timezone.utc)
 with open(f'imdb-top250-{now.strftime("%Y-%m-%d")}.json', "a") as f:
     f.write(json.dumps({"timestamp": now.isoformat(), "movies": scrape_imdb()}) + "\n")
 
